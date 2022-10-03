@@ -1,13 +1,17 @@
+const process = require('process');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/index.tsx',
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           // `.swcrc` can be used to configure swc
@@ -31,7 +35,7 @@ module.exports = {
   ],
   devServer: {
     //contentBase: path.join(__dirname, "dist"),
-    port: 3000,
+    port: process.env.PORT || 3000,
     liveReload: true,
   },
 };
